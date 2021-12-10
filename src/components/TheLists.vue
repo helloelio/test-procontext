@@ -18,6 +18,7 @@
           <input
             type="checkbox"
             :checked="item.checked"
+            :disabled="item.count === 0"
             @change="this.$emit('putList', item)"
           />
           <input v-model="item.count" max="10" type="number" />
