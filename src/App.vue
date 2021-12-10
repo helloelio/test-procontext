@@ -5,19 +5,22 @@
 <template>
   <div class="container">
     <div class="left-side">
-      <Lists
+      <the-lists
+        :title="'List 1'"
         :checked="allFirstChecked"
         :list="firstList"
         @getAllChecked="getAllFirstChecked"
         @putList="putFirstList"
       />
-      <Lists
+      <the-lists
+        :title="'List 2'"
         :checked="allSecondChecked"
         :list="secondList"
         @getAllChecked="getAllSecondChecked"
         @putList="putSecondList"
       />
-      <Lists
+      <the-lists
+        :title="'List 3'"
         :checked="allThirdChecked"
         :list="thirdList"
         @getAllChecked="getAllThirdChecked"
@@ -25,69 +28,23 @@
       />
     </div>
     <div class="right-side">
-      <div class="boxes">
-        <h1>Container 1</h1>
-        <div
-          class="box-container"
-          v-for="item in firstContainer"
-          :key="item.id"
-        >
-          <div
-            class="box-item"
-            :style="{
-              background: item.color,
-            }"
-            v-for="(box, idx) in item.count"
-            :key="idx"
-          ></div>
-        </div>
-      </div>
-      <div class="boxes">
-        <h1>Container 2</h1>
-        <div
-          class="box-container"
-          v-for="item in secondContainer"
-          :key="item.id"
-        >
-          <div
-            class="box-item"
-            :style="{
-              background: item.color,
-            }"
-            v-for="(box, idx) in item.count"
-            :key="idx"
-          ></div>
-        </div>
-      </div>
-      <div class="boxes">
-        <h1>Container 3</h1>
-        <div
-          class="box-container"
-          v-for="item in thirdContainer"
-          :key="item.id"
-        >
-          <div
-            class="box-item"
-            :style="{
-              background: item.color,
-            }"
-            v-for="(box, idx) in item.count"
-            :key="idx"
-          ></div>
-        </div>
-      </div>
+      <the-container :title="'Container 1'" :container="firstContainer" />
+      <the-container :title="'Container 2'" :container="secondContainer" />
+      <the-container :title="'Container 3'" :container="thirdContainer" />
     </div>
   </div>
 </template>
 
 <script>
-import Lists from './components/Lists.vue';
+import TheLists from './components/TheLists.vue';
+import TheContainer from './components/TheContainer.vue';
 
 export default {
   name: 'App',
 
   components: {
-    Lists,
+    TheLists,
+    TheContainer,
   },
 
   data() {
@@ -267,15 +224,8 @@ export default {
 
     putListToContainer(item, container) {
       item.checked = !item.checked;
-      console.log(item);
       if (item.checked) {
         container.push(item);
-      } else {
-        container.filter((containerItem) => {
-          if (containerItem.id === item.id) {
-            containerItem.checked = false;
-          }
-        });
       }
     },
 
@@ -303,25 +253,5 @@ li {
   display: grid;
   grid-template-columns: 50% 50%;
   padding: 10px;
-}
-.boxes {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid;
-  margin-bottom: 10px;
-  border-radius: 14px;
-  box-shadow: 0px 0px 10px 0px black;
-  padding: 15px;
-}
-.box-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 25px);
-  row-gap: 5px;
-  margin-bottom: 5px;
-}
-.box-item {
-  margin-left: 10px;
-  width: 15px;
-  height: 15px;
 }
 </style>
