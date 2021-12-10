@@ -28,9 +28,9 @@
       />
     </div>
     <div class="right-side">
-      <the-container :title="'Container 1'" :container="firstContainer" />
-      <the-container :title="'Container 2'" :container="secondContainer" />
-      <the-container :title="'Container 3'" :container="thirdContainer" />
+      <the-container :title="'Container 1'" :container="containerOne" />
+      <the-container :title="'Container 2'" :container="containerTwo" />
+      <the-container :title="'Container 3'" :container="containerThree" />
     </div>
   </div>
 </template>
@@ -172,6 +172,24 @@ export default {
     };
   },
 
+  computed: {
+    containerOne() {
+      return this.firstContainer.filter(
+        (item) => item.checked !== false && item.count !== 0,
+      );
+    },
+    containerTwo() {
+      return this.secondContainer.filter(
+        (item) => item.checked !== false && item.count !== 0,
+      );
+    },
+    containerThree() {
+      return this.thirdContainer.filter(
+        (item) => item.checked !== false && item.count !== 0,
+      );
+    },
+  },
+
   watch: {
     allFirstChecked(newValue) {
       this.handleAllFirstCheck(newValue);
@@ -185,6 +203,7 @@ export default {
   },
 
   methods: {
+    // ===========================
     handleAllFirstCheck(value) {
       /* eslint-disable */
       this.firstList.map((item) => {
@@ -203,32 +222,32 @@ export default {
         item.checked = value;
       });
     },
-    getChecked(item) {
-      console.log(item);
-    },
-    getColor(event) {
-      console.log(typeof event.target.value);
-    },
+    // ===========================
     getAllFirstChecked(value) {
       this.allFirstChecked = value;
-      console.log(this.allFirstChecked);
+      this.firstList.forEach((item) => {
+        if (!item.checked && item.count !== 0) {
+          this.firstContainer = [...this.firstList];
+        }
+      });
     },
     getAllSecondChecked(value) {
       this.allSecondChecked = value;
-      console.log(this.allSecondChecked);
+      this.secondList.forEach((item) => {
+        if (!item.checked && item.count !== 0) {
+          this.secondContainer = [...this.secondList];
+        }
+      });
     },
     getAllThirdChecked(value) {
       this.allThirdChecked = value;
-      console.log(this.allThirdChecked);
+      this.thirdList.forEach((item) => {
+        if (!item.checked && item.count !== 0) {
+          this.thirdContainer = [...this.thirdList];
+        }
+      });
     },
-
-    putListToContainer(item, container) {
-      item.checked = !item.checked;
-      if (item.checked) {
-        container.push(item);
-      }
-    },
-
+    // ===========================
     putFirstList(item) {
       this.putListToContainer(item, this.firstContainer);
     },
@@ -238,6 +257,13 @@ export default {
     putThirdList(item) {
       this.putListToContainer(item, this.thirdContainer);
     },
+    putListToContainer(item, container) {
+      item.checked = !item.checked;
+      if (item.checked && item.count !== 0) {
+        container.push(item);
+      }
+    },
+    // ===========================
   },
 };
 </script>
