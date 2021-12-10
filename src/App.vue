@@ -31,9 +31,21 @@
       />
     </div>
     <div class="right-side">
-      <the-container :title="'Container 1'" :container="containerOne" />
-      <the-container :title="'Container 2'" :container="containerTwo" />
-      <the-container :title="'Container 3'" :container="containerThree" />
+      <the-container
+        :title="'Container 1'"
+        :container="containerOne"
+        @deleteItemFromContainer="deleteItemFromContainer"
+      />
+      <the-container
+        :title="'Container 2'"
+        :container="containerTwo"
+        @deleteItemFromContainer="deleteItemFromContainer"
+      />
+      <the-container
+        :title="'Container 3'"
+        :container="containerThree"
+        @deleteItemFromContainer="deleteItemFromContainer"
+      />
     </div>
   </div>
 </template>
@@ -206,6 +218,9 @@ export default {
   },
 
   methods: {
+    deleteItemFromContainer(item) {
+      item.count -= 1;
+    },
     // ===========================
     handleAllCheck(value, name) {
       /* eslint-disable */
