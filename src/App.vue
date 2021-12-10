@@ -58,114 +58,114 @@ export default {
       firstList: [
         {
           id: 1,
-          count: 0,
+          count: 6,
           color: '#ffffff',
           checked: false,
         },
         {
           id: 2,
-          count: 0,
-          color: '#ffffff',
+          count: 10,
+          color: '#244526',
           checked: false,
         },
         {
           id: 3,
-          count: 0,
-          color: '#ffffff',
+          count: 4,
+          color: '#654745',
           checked: false,
         },
         {
           id: 4,
-          count: 0,
-          color: '#ffffff',
+          count: 15,
+          color: '#855363',
           checked: false,
         },
         {
           id: 5,
-          count: 0,
-          color: '#ffffff',
+          count: 47,
+          color: '#934f93',
           checked: false,
         },
         {
           id: 6,
-          count: 0,
-          color: '#ffffff',
+          count: 54,
+          color: '#59de34',
           checked: false,
         },
       ],
       secondList: [
         {
           id: 1,
-          count: 0,
-          color: '#ffffff',
+          count: 10,
+          color: '#11ee11',
           checked: false,
         },
         {
           id: 2,
-          count: 0,
-          color: '#ffffff',
+          count: 20,
+          color: '#22ee22',
           checked: false,
         },
         {
           id: 3,
-          count: 0,
-          color: '#ffffff',
+          count: 30,
+          color: '#33ee33',
           checked: false,
         },
         {
           id: 4,
-          count: 0,
-          color: '#ffffff',
+          count: 40,
+          color: '#44ee44',
           checked: false,
         },
         {
           id: 5,
-          count: 0,
-          color: '#ffffff',
+          count: 50,
+          color: '#55ee55',
           checked: false,
         },
         {
           id: 6,
-          count: 0,
-          color: '#ffffff',
+          count: 60,
+          color: '#66ee66',
           checked: false,
         },
         {
           id: 7,
-          count: 0,
-          color: '#ffffff',
+          count: 70,
+          color: '#77ee77',
           checked: false,
         },
         {
           id: 8,
-          count: 0,
-          color: '#ffffff',
+          count: 80,
+          color: '#88ee88',
           checked: false,
         },
       ],
       thirdList: [
         {
           id: 1,
-          count: 0,
-          color: '#ffffff',
+          count: 1,
+          color: '#1e2e45',
           checked: false,
         },
         {
           id: 2,
-          count: 0,
-          color: '#ffffff',
+          count: 2,
+          color: '#2a2eee',
           checked: false,
         },
         {
           id: 3,
-          count: 0,
-          color: '#ffffff',
+          count: 3,
+          color: '#5ee5ee',
           checked: false,
         },
         {
           id: 4,
-          count: 0,
-          color: '#ffffff',
+          count: 4,
+          color: '#33e1a2',
           checked: false,
         },
       ],
@@ -258,24 +258,24 @@ export default {
     handlePutList(payload) {
       switch (payload.title) {
         case 'List 1':
-          this.putListToContainer(payload.item, this.firstContainer);
+          payload.item.checked = !payload.item.checked;
+          if (payload.item.checked) {
+            this.firstContainer.push(payload.item);
+          }
           break;
         case 'List 2 ':
-          this.putListToContainer(payload.item, this.secondContainer);
+          payload.item.checked = !payload.item.checked;
+          if (payload.item.checked) {
+            this.secondContainer.push(payload.item);
+          }
           break;
         case 'List 3':
-          this.putListToContainer(payload.item, this.thirdContainer);
+          payload.item.checked = !payload.item.checked;
+          if (payload.item.checked) {
+            this.thirdContainer.push(payload.item);
+          }
       }
     },
-    putListToContainer(item, container) {
-      item.checked = !item.checked;
-      if (container.length === 0) {
-        container.push(item);
-      } else {
-        container.push(item);
-      }
-    },
-    // ===========================
   },
 };
 </script>
