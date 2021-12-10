@@ -9,22 +9,25 @@
         :title="'List 1'"
         :checked="allFirstChecked"
         :list="firstList"
-        @getAllChecked="getAllFirstChecked"
-        @putList="putFirstList"
+        :container="firstContainer"
+        @getAllChecked="getAllChecked"
+        @putList="handlePutList"
       />
       <the-lists
         :title="'List 2'"
         :checked="allSecondChecked"
         :list="secondList"
-        @getAllChecked="getAllSecondChecked"
-        @putList="putSecondList"
+        :container="secondContainer"
+        @getAllChecked="getAllChecked"
+        @putList="handlePutList"
       />
       <the-lists
         :title="'List 3'"
         :checked="allThirdChecked"
         :list="thirdList"
-        @getAllChecked="getAllThirdChecked"
-        @putList="putThirdList"
+        :container="thirdContainer"
+        @getAllChecked="getAllChecked"
+        @putList="handlePutList"
       />
     </div>
     <div class="right-side">
@@ -192,74 +195,84 @@ export default {
 
   watch: {
     allFirstChecked(newValue) {
-      this.handleAllFirstCheck(newValue);
+      this.handleAllCheck(newValue, 'first');
     },
     allSecondChecked(newValue) {
-      this.handleAllSecondCheck(newValue);
+      this.handleAllCheck(newValue, 'second');
     },
     allThirdChecked(newValue) {
-      this.handleAllThirdCheck(newValue);
+      this.handleAllCheck(newValue, 'third');
     },
   },
 
   methods: {
     // ===========================
-    handleAllFirstCheck(value) {
+    handleAllCheck(value, name) {
       /* eslint-disable */
-      this.firstList.map((item) => {
-        item.checked = value;
-      });
-    },
-    handleAllSecondCheck(value) {
-      /* eslint-disable */
-      this.secondList.map((item) => {
-        item.checked = value;
-      });
-    },
-    handleAllThirdCheck(value) {
-      /* eslint-disable */
-      this.thirdList.map((item) => {
-        item.checked = value;
-      });
+      switch (name) {
+        case 'first':
+          this.firstList.map((item) => {
+            item.checked = value;
+          });
+          break;
+        case 'second':
+          this.secondList.map((item) => {
+            item.checked = value;
+          });
+          break;
+        case 'third':
+          this.thirdList.map((item) => {
+            item.checked = value;
+          });
+      }
     },
     // ===========================
-    getAllFirstChecked(value) {
-      this.allFirstChecked = value;
-      this.firstList.forEach((item) => {
-        if (!item.checked && item.count !== 0) {
-          this.firstContainer = [...this.firstList];
-        }
-      });
-    },
-    getAllSecondChecked(value) {
-      this.allSecondChecked = value;
-      this.secondList.forEach((item) => {
-        if (!item.checked && item.count !== 0) {
-          this.secondContainer = [...this.secondList];
-        }
-      });
-    },
-    getAllThirdChecked(value) {
-      this.allThirdChecked = value;
-      this.thirdList.forEach((item) => {
-        if (!item.checked && item.count !== 0) {
-          this.thirdContainer = [...this.thirdList];
-        }
-      });
+    getAllChecked(payload) {
+      switch (payload.title) {
+        case 'List 1':
+          this.allFirstChecked = payload.checked;
+          this.firstList.forEach((item) => {
+            if (!item.checked && item.count !== 0) {
+              this.firstContainer = [...this.firstList];
+            }
+          });
+          break;
+        case 'List 2':
+          this.allSecondChecked = payload.checked;
+          this.secondList.forEach((item) => {
+            if (!item.checked && item.count !== 0) {
+              this.secondContainer = [...this.secondList];
+            }
+          });
+          break;
+        case 'List 3':
+          this.allThirdChecked = payload.checked;
+          this.thirdList.forEach((item) => {
+            if (!item.checked && item.count !== 0) {
+              this.thirdContainer = [...this.thirdList];
+            }
+          });
+      }
     },
     // ===========================
-    putFirstList(item) {
-      this.putListToContainer(item, this.firstContainer);
-    },
-    putSecondList(item) {
-      this.putListToContainer(item, this.secondContainer);
-    },
-    putThirdList(item) {
-      this.putListToContainer(item, this.thirdContainer);
+    handlePutList(payload) {
+      console.log(payload);
+      switch (payload.title) {
+        case 'List 1':
+          this.putListToContainer(payload.item, this.firstContainer);
+          break;
+        case 'List 2 ':
+          this.putListToContainer(payload.item, this.secondContainer);
+          break;
+        case 'List 3':
+          this.putListToContainer(payload.item, this.thirdContainer);
+      }
     },
     putListToContainer(item, container) {
       item.checked = !item.checked;
-      if (item.checked && item.count !== 0) {
+      if (container.length === 0) {
+        container.push(item);
+      } else {
         container.push(item);
       }
     },

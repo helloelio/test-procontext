@@ -4,9 +4,9 @@
       <input
         type="checkbox"
         v-model="checked"
-        @change="this.$emit('getAllChecked', checked)"
+        @change="this.$emit('getAllChecked', { checked, title })"
       />
-      <span class="list-title" @click="aboba">
+      <span class="list-title" @click="toggleList">
         <span> {{ title }}</span>
         <span class="arrow">
           <img v-if="!opened" src="../assets/down-arrow.svg" alt="" />
@@ -19,7 +19,7 @@
             type="checkbox"
             :checked="item.checked"
             :disabled="item.count === 0"
-            @change="this.$emit('putList', item)"
+            @change="this.$emit('putList', { item, title })"
           />
           <input v-model="item.count" max="10" type="number" />
           <input v-model="item.color" type="color" />
@@ -41,6 +41,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    container: {
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
@@ -49,7 +53,7 @@ export default {
     };
   },
   methods: {
-    aboba() {
+    toggleList() {
       this.opened = !this.opened;
     },
   },
