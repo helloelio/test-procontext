@@ -261,7 +261,7 @@ export default {
         case 'List 1':
           this.putListToContainer(payload.item, this.firstContainer);
           break;
-        case 'List 2 ':
+        case 'List 2':
           this.putListToContainer(payload.item, this.secondContainer);
           break;
         case 'List 3':
@@ -269,6 +269,7 @@ export default {
       }
     },
     putListToContainer(item, container) {
+      console.log(item);
       item.checked = !item.checked;
       if (container.length === 0) {
         container.push(item);
