@@ -33,16 +33,13 @@
           :key="item.id"
         >
           <div
+            class="box-item"
             :style="{
-              marginLeft: '10px',
               background: item.color,
-              color: item.color,
             }"
             v-for="(box, idx) in item.count"
             :key="idx"
-          >
-            {{ box }}
-          </div>
+          ></div>
         </div>
       </div>
       <div class="boxes">
@@ -53,16 +50,13 @@
           :key="item.id"
         >
           <div
+            class="box-item"
             :style="{
-              marginLeft: '10px',
               background: item.color,
-              color: item.color,
             }"
             v-for="(box, idx) in item.count"
             :key="idx"
-          >
-            {{ box }}
-          </div>
+          ></div>
         </div>
       </div>
       <div class="boxes">
@@ -73,16 +67,13 @@
           :key="item.id"
         >
           <div
+            class="box-item"
             :style="{
-              marginLeft: '10px',
               background: item.color,
-              color: item.color,
             }"
             v-for="(box, idx) in item.count"
             :key="idx"
-          >
-            {{ box }}
-          </div>
+          ></div>
         </div>
       </div>
     </div>
@@ -327,5 +318,10 @@ li {
   grid-template-columns: repeat(auto-fill, 25px);
   row-gap: 5px;
   margin-bottom: 5px;
+}
+.box-item {
+  margin-left: 10px;
+  width: 15px;
+  height: 15px;
 }
 </style>
