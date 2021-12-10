@@ -264,29 +264,29 @@ export default {
       this.allThirdChecked = value;
       console.log(this.allThirdChecked);
     },
-    putFirstList(item) {
-      if (item.count > 0 && item.color !== '#ffffff' && item.checked) {
-        this.firstContainer.push(item);
-      }
-    },
-    putSecondList(item) {
-      if (item.count > 0 && item.color !== '#ffffff' && item.checked) {
-        this.secondContainer.push(item);
-      }
-    },
-    putThirdList(item) {
+
+    putListToContainer(item, container) {
       item.checked = !item.checked;
-      if (this.thirdContainer.length === 0) {
-        console.log('a');
-        this.thirdContainer.push(item);
-      } else if (item.count > 0 && item.color !== '#ffffff' && item.checked) {
-        console.log('b');
-        this.thirdContainer.every((itemContainer) => {
-          if (itemContainer.id !== item.id) {
-            this.thirdContainer.push(item);
+      console.log(item);
+      if (item.checked) {
+        container.push(item);
+      } else {
+        container.filter((containerItem) => {
+          if (containerItem.id === item.id) {
+            containerItem.checked = false;
           }
         });
       }
+    },
+
+    putFirstList(item) {
+      this.putListToContainer(item, this.firstContainer);
+    },
+    putSecondList(item) {
+      this.putListToContainer(item, this.secondContainer);
+    },
+    putThirdList(item) {
+      this.putListToContainer(item, this.thirdContainer);
     },
   },
 };
