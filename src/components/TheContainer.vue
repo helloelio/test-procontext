@@ -10,7 +10,22 @@
         }"
         v-for="(box, idx) in item.count"
         :key="idx"
-      ></div>
+      >
+        <svg
+          class="cross-img"
+          :style="{ stroke: item.color, filter: 'invert(100%)' }"
+          width="10"
+          height="10"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M20 4L4 20M20 20L4 4L20 20Z"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </div>
     </div>
   </div>
 </template>
@@ -51,6 +66,8 @@ export default {
   border-bottom: 1px solid black;
 }
 .box-item {
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 1);
   width: 10px;
   height: 10px;
   border-radius: 2px;
@@ -59,9 +76,15 @@ export default {
 }
 
 .box-item:hover {
-  background-image: url('../assets/cross.svg') !important;
+  border: 1px solid rgba(255, 0, 0, 0.5);
 }
-
+.cross-img {
+  display: none;
+  position: absolute;
+}
+.box-item:hover .cross-img {
+  display: block;
+}
 .hr {
   background-color: black;
 }
