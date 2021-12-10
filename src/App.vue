@@ -9,7 +9,7 @@
         :title="'List 1'"
         :checked="allFirstChecked"
         :list="firstList"
-        :container="firstContainer"
+        :container="containerOne"
         @getAllChecked="getAllChecked"
         @putList="handlePutList"
       />
@@ -17,7 +17,7 @@
         :title="'List 2'"
         :checked="allSecondChecked"
         :list="secondList"
-        :container="secondContainer"
+        :container="containerTwo"
         @getAllChecked="getAllChecked"
         @putList="handlePutList"
       />
@@ -25,7 +25,7 @@
         :title="'List 3'"
         :checked="allThirdChecked"
         :list="thirdList"
-        :container="thirdContainer"
+        :container="containerThree"
         @getAllChecked="getAllChecked"
         @putList="handlePutList"
       />
@@ -249,6 +249,8 @@ export default {
           this.firstList.forEach((item) => {
             if (!item.checked && item.count !== 0) {
               this.firstContainer = [...this.firstList];
+            } else {
+              this.firstContainer = [];
             }
           });
           break;
@@ -257,6 +259,8 @@ export default {
           this.secondList.forEach((item) => {
             if (!item.checked && item.count !== 0) {
               this.secondContainer = [...this.secondList];
+            } else {
+              this.secondContainer = [];
             }
           });
           break;
@@ -265,10 +269,14 @@ export default {
           this.thirdList.forEach((item) => {
             if (!item.checked && item.count !== 0) {
               this.thirdContainer = [...this.thirdList];
+            } else {
+              this.thirdContainer = [];
             }
           });
       }
     },
+
+    helperAllChecked() {},
     // ===========================
     handlePutList(payload) {
       switch (payload.title) {
@@ -276,20 +284,28 @@ export default {
           payload.item.checked = !payload.item.checked;
           if (payload.item.checked) {
             this.firstContainer.push(payload.item);
+          } else {
+            this.firstContainer.splice(payload.item.id - 1, 1);
           }
           break;
-        case 'List 2 ':
-          payload.item.checked = !payload.item.checked;
+        case 'List 2':
           if (payload.item.checked) {
             this.secondContainer.push(payload.item);
+          } else {
+            this.secondContainer.splice(payload.item.id - 1, 1);
           }
           break;
         case 'List 3':
           payload.item.checked = !payload.item.checked;
           if (payload.item.checked) {
             this.thirdContainer.push(payload.item);
+          } else {
+            this.thirdContainer.splice(payload.item.id - 1, 1);
           }
       }
+    },
+    helperHandlePutList() {
+      //
     },
   },
 };
