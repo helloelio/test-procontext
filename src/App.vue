@@ -275,38 +275,30 @@ export default {
           });
       }
     },
-
-    helperAllChecked() {},
+    helperAllChecked(container, list) {},
     // ===========================
     handlePutList(payload) {
       switch (payload.title) {
         case 'List 1':
-          payload.item.checked = !payload.item.checked;
-          if (payload.item.checked) {
-            this.firstContainer.push(payload.item);
-          } else {
-            this.firstContainer.splice(payload.item.id - 1, 1);
-          }
+          this.helperHandlePutList(payload, this.firstContainer);
           break;
         case 'List 2':
-          if (payload.item.checked) {
-            this.secondContainer.push(payload.item);
-          } else {
-            this.secondContainer.splice(payload.item.id - 1, 1);
-          }
+          this.helperHandlePutList(payload, this.secondContainer);
+
           break;
         case 'List 3':
-          payload.item.checked = !payload.item.checked;
-          if (payload.item.checked) {
-            this.thirdContainer.push(payload.item);
-          } else {
-            this.thirdContainer.splice(payload.item.id - 1, 1);
-          }
+          this.helperHandlePutList(payload, this.thirdContainer);
       }
     },
-    helperHandlePutList() {
-      //
+    helperHandlePutList(payload, container) {
+      payload.item.checked = !payload.item.checked;
+      if (payload.item.checked) {
+        container.push(payload.item);
+      } else {
+        container.splice(payload.item.id - 1, 1);
+      }
     },
+    // ===========================
   },
 };
 </script>
