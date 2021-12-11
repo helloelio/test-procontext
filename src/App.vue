@@ -306,7 +306,7 @@ export default {
           if (payload.item.checked) {
             this.thirdContainer.push(payload.item);
           } else {
-            this.thirdContainer = this.thirdContainers.filter((item) => {
+            this.thirdContainer = this.thirdContainer.filter((item) => {
               return item.id !== payload.item.id;
             });
           }
@@ -318,7 +318,7 @@ export default {
       if (payload.item.checked) {
         container.push(payload.item);
       } else {
-        this.firstContainer = container.filter((item) => {
+        container = container.filter((item) => {
           return item.id !== payload.item.id;
         });
       }
