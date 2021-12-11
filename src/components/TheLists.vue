@@ -19,6 +19,7 @@
         <li v-for="(item, idx) in list" :key="idx">
           <input
             type="checkbox"
+            :disabled="item.count === 0"
             :checked="item.checked"
             @change="this.$emit('putList', { item, title })"
           />

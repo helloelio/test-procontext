@@ -34,17 +34,17 @@
       <the-container
         :title="'Container 1'"
         :container="firstContainer"
-        @deleteItemFromContainer="deleteItemFromContainer"
+        @deleteItemFromContainer="deleteItemFromFirstContainer"
       />
       <the-container
         :title="'Container 2'"
         :container="secondContainer"
-        @deleteItemFromContainer="deleteItemFromContainer"
+        @deleteItemFromContainer="deleteItemFromSecondContainer"
       />
       <the-container
         :title="'Container 3'"
         :container="thirdContainer"
-        @deleteItemFromContainer="deleteItemFromContainer"
+        @deleteItemFromContainer="deleteItemFromThirdContainer"
       />
     </div>
   </div>
@@ -314,10 +314,33 @@ export default {
     },
 
     // Метод который удаляет item при нажатии на квадратик в контейнере
-    deleteItemFromContainer(item) {
+    deleteItemFromFirstContainer(item) {
       item.count -= 1;
+      if (item.count === 0) {
+        this.firstContainer = this.firstContainer.filter((conItem) => {
+          return conItem.id !== item.id;
+        });
+        item.checked = false;
+      }
     },
-
+    deleteItemFromSecondContainer(item) {
+      item.count -= 1;
+      if (item.count === 0) {
+        this.secondContainer = this.secondContainer.filter((conItem) => {
+          return conItem.id !== item.id;
+        });
+        item.checked = false;
+      }
+    },
+    deleteItemFromThirdContainer(item) {
+      item.count -= 1;
+      if (item.count === 0) {
+        this.thirdContainer = this.thirdContainer.filter((conItem) => {
+          return conItem.id !== item.id;
+        });
+        item.checked = false;
+      }
+    },
     // Попытка минимизировать код в HandlePutList путем вызова
     // метода helperHandlePutList который принимает два параметра
     // объект payload с item и container для каждого листа
