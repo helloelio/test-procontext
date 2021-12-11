@@ -280,14 +280,37 @@ export default {
     handlePutList(payload) {
       switch (payload.title) {
         case 'List 1':
-          this.helperHandlePutList(payload, this.firstContainer);
+          payload.item.checked = !payload.item.checked;
+          if (payload.item.checked) {
+            this.firstContainer.push(payload.item);
+          } else {
+            this.firstContainer = this.firstContainer.filter((item) => {
+              return item.id !== payload.item.id;
+            });
+          }
+          // this.helperHandlePutList(payload, this.firstContainer);
           break;
         case 'List 2':
-          this.helperHandlePutList(payload, this.secondContainer);
-
+          payload.item.checked = !payload.item.checked;
+          if (payload.item.checked) {
+            this.secondContainer.push(payload.item);
+          } else {
+            this.secondContainer = this.secondContainer.filter((item) => {
+              return item.id !== payload.item.id;
+            });
+          }
+          // this.helperHandlePutList(payload, this.secondContainer);
           break;
         case 'List 3':
-          this.helperHandlePutList(payload, this.thirdContainer);
+          payload.item.checked = !payload.item.checked;
+          if (payload.item.checked) {
+            this.thirdContainer.push(payload.item);
+          } else {
+            this.thirdContainer = this.thirdContainers.filter((item) => {
+              return item.id !== payload.item.id;
+            });
+          }
+        // this.helperHandlePutList(payload, this.thirdContainer);
       }
     },
     helperHandlePutList(payload, container) {
@@ -295,7 +318,9 @@ export default {
       if (payload.item.checked) {
         container.push(payload.item);
       } else {
-        container.splice(payload.item.id - 1, 1);
+        this.firstContainer = container.filter((item) => {
+          return item.id !== payload.item.id;
+        });
       }
     },
     // ===========================
