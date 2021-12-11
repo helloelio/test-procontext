@@ -2,10 +2,12 @@
   <ul>
     <li>
       <input
+        :class="{ mainCheckbox: getSingleCheck }"
         type="checkbox"
         v-model="checked"
         @change="this.$emit('getAllChecked', { checked, title })"
       />
+      <span class="some-single-checked"></span>
       <span class="list-title" @click="toggleList">
         <span> {{ title }}</span>
         <span class="arrow">
@@ -18,7 +20,6 @@
           <input
             type="checkbox"
             :checked="item.checked"
-            :disabled="item.count === 0"
             @change="this.$emit('putList', { item, title })"
           />
           <input v-model="item.count" max="10" type="number" />
@@ -46,12 +47,21 @@ export default {
       default: () => [],
     },
   },
+
   data() {
     return {
       checked: false,
       opened: false,
     };
   },
+
+  computed: {
+    /* eslint-disable */
+    getSingleCheck() {
+      return this.list.some((item) => item.checked === true);
+    },
+  },
+
   methods: {
     toggleList() {
       this.opened = !this.opened;
@@ -74,5 +84,13 @@ export default {
 }
 .arrow {
   margin-left: 5px;
+}
+.mainCheckbox::before {
+  content: '';
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: black;
+  transform: translate(4px, 4px);
 }
 </style>
