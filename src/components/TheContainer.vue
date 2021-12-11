@@ -1,30 +1,34 @@
 <template>
   <div class="boxes">
-    <h2>{{ title }}</h2>
-    <div class="box-container" v-for="item in container" :key="item.id">
-      <div
-        @click="this.$emit('deleteItemFromContainer', item)"
-        class="box-item"
-        :style="{
-          background: item.color,
-        }"
-        v-for="(box, idx) in item.count"
-        :key="idx"
-      >
-        <svg
-          class="cross-img"
-          :style="{ stroke: item.color, filter: 'invert(100%)' }"
-          width="10"
-          height="10"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
+    <h2 class="boxes-title">
+      {{ title }}
+    </h2>
+    <div class="boxes-container">
+      <div class="box-container" v-for="item in container" :key="item.id">
+        <div
+          @click="this.$emit('deleteItemFromContainer', item)"
+          class="box-item"
+          :style="{
+            background: item.color,
+          }"
+          v-for="(box, idx) in item.count"
+          :key="idx"
         >
-          <path
-            d="M20 4L4 20M20 20L4 4L20 20Z"
-            stroke-width="2"
-            stroke-linecap="round"
-          />
-        </svg>
+          <svg
+            class="cross-img"
+            :style="{ stroke: item.color, filter: 'invert(100%)' }"
+            width="10"
+            height="10"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M20 4L4 20M20 20L4 4L20 20Z"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+        </div>
       </div>
     </div>
   </div>
@@ -47,6 +51,10 @@ export default {
 </script>
 
 <style scoped>
+.boxes-title {
+  cursor: pointer;
+  transition: 0.3s ease;
+}
 .boxes {
   background-color: rgba(0, 0, 0, 0.1);
   display: flex;
