@@ -9,7 +9,7 @@
         :title="'List 1'"
         :checked="allFirstChecked"
         :list="firstList"
-        :container="containerOne"
+        :container="firstContainer"
         @getAllChecked="getAllChecked"
         @putList="handlePutList"
       />
@@ -17,7 +17,7 @@
         :title="'List 2'"
         :checked="allSecondChecked"
         :list="secondList"
-        :container="containerTwo"
+        :container="secondContainer"
         @getAllChecked="getAllChecked"
         @putList="handlePutList"
       />
@@ -25,7 +25,7 @@
         :title="'List 3'"
         :checked="allThirdChecked"
         :list="thirdList"
-        :container="containerThree"
+        :container="thirdContainer"
         @getAllChecked="getAllChecked"
         @putList="handlePutList"
       />
@@ -33,17 +33,17 @@
     <div class="right-side">
       <the-container
         :title="'Container 1'"
-        :container="containerOne"
+        :container="firstContainer"
         @deleteItemFromContainer="deleteItemFromContainer"
       />
       <the-container
         :title="'Container 2'"
-        :container="containerTwo"
+        :container="secondContainer"
         @deleteItemFromContainer="deleteItemFromContainer"
       />
       <the-container
         :title="'Container 3'"
-        :container="containerThree"
+        :container="thirdContainer"
         @deleteItemFromContainer="deleteItemFromContainer"
       />
     </div>
@@ -185,24 +185,6 @@ export default {
       secondContainer: [],
       thirdContainer: [],
     };
-  },
-
-  computed: {
-    containerOne() {
-      return this.firstContainer.filter(
-        (item) => item.checked !== false && item.count !== 0,
-      );
-    },
-    containerTwo() {
-      return this.secondContainer.filter(
-        (item) => item.checked !== false && item.count !== 0,
-      );
-    },
-    containerThree() {
-      return this.thirdContainer.filter(
-        (item) => item.checked !== false && item.count !== 0,
-      );
-    },
   },
 
   watch: {

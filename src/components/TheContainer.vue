@@ -51,10 +51,6 @@ export default {
 </script>
 
 <style scoped>
-.boxes-title {
-  cursor: pointer;
-  transition: 0.3s ease;
-}
 .boxes {
   background-color: rgba(0, 0, 0, 0.1);
   display: flex;
