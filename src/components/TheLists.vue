@@ -2,7 +2,7 @@
   <ul>
     <li>
       <input
-        :class="{ mainCheckbox: getSingleCheck }"
+        :class="{ mainCheckbox: getSingleCheck && !checked }"
         type="checkbox"
         v-model="checked"
         @change="this.$emit('getAllChecked', { checked, title })"
@@ -59,6 +59,9 @@ export default {
     /* eslint-disable */
     getSingleCheck() {
       return this.list.some((item) => item.checked === true);
+    },
+    getSingleUncheck() {
+      return this.list.every((item) => item.checked === true);
     },
   },
 
