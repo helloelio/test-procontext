@@ -187,6 +187,21 @@ export default {
     };
   },
 
+  // ===========================
+  // computed: {
+  // Вариант отправлять отсортированный массив в контйнер[ ],
+  //  чтобы они отображались в контейнере идентично порядку листа
+  // containerOne() {
+  //   return this.firstContainer.sort((a, b) => a.id - b.id);
+  // },
+  // },
+  // ===========================
+
+  // ===========================
+  // наблюдатель за главным чекбоксам,
+  // при его изменении вызывает метод
+  // где проставляет для каждого айтема
+  // значение != значение
   watch: {
     allFirstChecked(newValue) {
       this.handleAllCheck(newValue, 'first');
@@ -198,12 +213,9 @@ export default {
       this.handleAllCheck(newValue, 'third');
     },
   },
+  // ===========================
 
   methods: {
-    deleteItemFromContainer(item) {
-      item.count -= 1;
-    },
-    // ===========================
     handleAllCheck(value, name) {
       /* eslint-disable */
       switch (name) {
@@ -223,6 +235,11 @@ export default {
           });
       }
     },
+    // ===========================
+    // метод вызывающийся путем нажатия на Главны чекбокс
+    // Простовляет в дату первого чекбокса = true
+    // и присваивает определенному контейнеру элементы листа(после проверки)
+    // если проверка не сработала просто очищаем массив
     // ===========================
     getAllChecked(payload) {
       switch (payload.title) {
@@ -270,6 +287,8 @@ export default {
               return item.id !== payload.item.id;
             });
           }
+          // Пример вызова хелпера
+          // payload.item.checked = !payload.item.checked;
           // this.helperHandlePutList(payload, this.firstContainer);
           break;
         case 'List 2':
@@ -281,7 +300,6 @@ export default {
               return item.id !== payload.item.id;
             });
           }
-          // this.helperHandlePutList(payload, this.secondContainer);
           break;
         case 'List 3':
           payload.item.checked = !payload.item.checked;
@@ -292,19 +310,28 @@ export default {
               return item.id !== payload.item.id;
             });
           }
-        // this.helperHandlePutList(payload, this.thirdContainer);
       }
     },
-    helperHandlePutList(payload, container) {
-      payload.item.checked = !payload.item.checked;
-      if (payload.item.checked) {
-        container.push(payload.item);
-      } else {
-        container = container.filter((item) => {
-          return item.id !== payload.item.id;
-        });
-      }
+
+    // Метод который удаляет item при нажатии на квадратик в контейнере
+    deleteItemFromContainer(item) {
+      item.count -= 1;
     },
+
+    // Попытка минимизировать код в HandlePutList путем вызова
+    // метода helperHandlePutList который принимает два параметра
+    // объект payload с item и container для каждого листа
+
+    // helperHandlePutList(payload, container) {
+    //   payload.item.checked = !payload.item.checked;
+    //   if (payload.item.checked) {
+    //     container.push(payload.item);
+    //   } else {
+    //     container = container.filter((item) => {
+    //       return item.id !== payload.item.id;
+    //     });
+    //   }
+    // },
     // ===========================
   },
 };
