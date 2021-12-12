@@ -220,27 +220,22 @@ export default {
       /* eslint-disable */
       switch (name) {
         case 'first':
-          this.firstList.map((item) => {
-            item.checked = value;
-          });
+          this.firstList.map((item) => (item.checked = value));
           break;
         case 'second':
-          this.secondList.map((item) => {
-            item.checked = value;
-          });
+          this.secondList.map((item) => (item.checked = value));
           break;
         case 'third':
-          this.thirdList.map((item) => {
-            item.checked = value;
-          });
+          this.thirdList.map((item) => (item.checked = value));
       }
     },
     // ===========================
-    // метод вызывающийся путем нажатия на Главны чекбокс
+    // метод вызывающийся путем нажатия на Главный чекбокс
     // Простовляет в дату первого чекбокса = true
     // и присваивает определенному контейнеру элементы листа(после проверки)
     // если проверка не сработала просто очищаем массив
     // ===========================
+
     getAllChecked(payload) {
       switch (payload.title) {
         case 'List 1':
@@ -274,7 +269,6 @@ export default {
           });
       }
     },
-    helperAllChecked(container, list) {},
     // ===========================
     handlePutList(payload) {
       switch (payload.title) {
@@ -287,9 +281,6 @@ export default {
               return item.id !== payload.item.id;
             });
           }
-          // Пример вызова хелпера
-          // payload.item.checked = !payload.item.checked;
-          // this.helperHandlePutList(payload, this.firstContainer);
           break;
         case 'List 2':
           payload.item.checked = !payload.item.checked;
@@ -312,12 +303,12 @@ export default {
           }
       }
     },
-
+    // ===========================
     // Метод который удаляет item при нажатии на квадратик в контейнере
     deleteItemFromFirstContainer(item) {
       item.count -= 1;
       if (item.count === 0) {
-        this.firstContainer = this.firstContainer.filter((conItem) => {
+        this.firstContainer.filter((conItem) => {
           return conItem.id !== item.id;
         });
         item.checked = false;
@@ -341,21 +332,6 @@ export default {
         item.checked = false;
       }
     },
-    // Попытка минимизировать код в HandlePutList путем вызова
-    // метода helperHandlePutList который принимает два параметра
-    // объект payload с item и container для каждого листа
-
-    // helperHandlePutList(payload, container) {
-    //   payload.item.checked = !payload.item.checked;
-    //   if (payload.item.checked) {
-    //     container.push(payload.item);
-    //   } else {
-    //     container = container.filter((item) => {
-    //       return item.id !== payload.item.id;
-    //     });
-    //   }
-    // },
-    // ===========================
   },
 };
 </script>
